@@ -10,7 +10,7 @@ MinecraftCLI is a command-line interface (CLI) application built with Go and pow
 ## Installation
 ### Install with Go
 ```bash
-go install https://github.com/Dontknow09/MinecraftCLI
+go install https://github.com/Dontknow09/MinecraftCLI@latest
 ```
 ### Build from source
 1. Clone the repository:

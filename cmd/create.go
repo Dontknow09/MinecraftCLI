@@ -5,9 +5,38 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 
+	tea "github.com/charmbracelet/bubbletea"
+	"github.com/charmbracelet/huh"
 	"github.com/spf13/cobra"
 )
+
+var (
+	name          string
+	modloader     string
+	gameversion   string
+	loaderversion string
+)
+
+type formModel struct {
+	form huh.Form
+}
+
+func (m formModel) Init() tea.Cmd {
+	return nil
+}
+
+func (m formModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+	var cmd tea.Cmd
+	form, cmd := m.form.Update(msg)
+	m.form = *form.(*huh.Form)
+	return m, cmd
+}
+
+func (m formModel) View() string {
+	return m.form.View()
+}
 
 // createCmd represents the create command
 var createCmd = &cobra.Command{
@@ -20,7 +49,14 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("create called")
+		p := tea.NewProgram(formModel{form: *huh.NewForm(
+			huh.NewGroup().Title("Name"),
+			huh.NewGroup().Title("Create new profile"),
+		)})
+		if _, err := p.Run(); err != nil {
+			fmt.Println("Error starting form:", err)
+			os.Exit(1)
+		}
 	},
 }
 
