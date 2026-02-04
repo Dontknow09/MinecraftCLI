@@ -1,3 +1,7 @@
+# Why is it archived? 
+Read the blog post: https://dontknow09.github.io/blog/minecraftcliarchivation
+
+
 # MinecraftCLI
 
 MinecraftCLI is a command-line interface (CLI) application built with Go and powered by the Cobra library. It provides tools and commands to interact with Minecraft-related functionalities.
